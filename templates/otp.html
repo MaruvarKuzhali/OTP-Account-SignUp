@@ -1,0 +1,49 @@
+<html>
+    <head>
+        <title>Home Page</title>
+        <script>
+            var submit = document.getElementById('submit');
+            var resend = document.getElementById('resend');
+            var timeleft = 300;
+            var downloadTimer = setInterval(function(){
+            if(timeleft <= 0){
+                stops();
+                clearInterval(downloadTimer);
+            }
+            document.getElementById("progressBar").value = 300 - timeleft;
+            timeleft -= 1;
+            }, 1000);
+             
+            function stops(){
+            document.getElementById('submit').disabled = true;
+            alert("OTP has Expired. Try Resend OTP");
+            }
+
+            resend.onclick = function(){
+                timeleft = 300;
+                setInterval(downloadTimer, 1000);
+                document.getElementById('submit').disabled = false;
+            }
+        </script>
+    </head>
+    <body>
+        <h2>OTP Verification</h2>
+        <form name="otp" action="http://127.0.0.1:5000/verify_otp" method="POST">
+            Please enter the OTP : <input type="number" length=6 name="otp">
+            <input type="submit" id="submit" name="submit" value="VERIFY OTP">
+        </form>
+        <form name="resend" action="http://127.0.0.1:5000/resend_otp" method="GET">
+            <input name="submit" type="submit" id="resend" value="RESEND OTP">
+        </form>
+        {% with messages = get_flashed_messages() %}  
+            {% if messages %}  
+                {% for message in messages %}  
+                   <p>{{ message }}</p>  
+                {% endfor %}  
+            {% endif %}  
+        {% endwith %}  
+    </body>
+    <p>OTP Expiration Progress Bar</p>
+    <progress value="0" max="300" id="progressBar"></progress>
+</html>
+

@@ -1,0 +1,52 @@
+<html>
+    <head>
+        <title>
+            Login Page
+        </title>
+    </head>
+    <body>
+        <style>
+            input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-top: 6px;
+  margin-bottom: 16px;
+}
+
+/* Style the submit button */
+input[type=submit] {
+  background-color: #04AA6D;
+  color: white;
+}
+
+/* Style the container for inputs */
+.container {
+  background-color: #f1f1f1;
+  padding: 20px;
+}
+        </style>
+        <h2>User Login</h2>
+        {% with messages = get_flashed_messages() %}  
+            {% if messages %}  
+                {% for message in messages %}  
+                   <p>{{ message }}</p>  
+                {% endfor %}  
+            {% endif %}  
+        {% endwith %} 
+        <div class="container">
+            <form action="http://localhost:5000/login_check" method="POST">
+              <label for="usrname">Email ID</label>
+              <input type="email" name="mailid" required>
+          
+              <label for="psw">Password</label>
+            <input type="password" id="psw" name="psw" required>
+          <a href="http://localhost:5000/forgot_pass">Forgot Password?</a>
+              <input type="submit" value="Submit">
+            </form>
+          </div>
+          
+    </body>
+</html>

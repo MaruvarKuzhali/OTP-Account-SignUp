@@ -1,0 +1,19 @@
+<html>
+    <head>
+        <title>Home Page</title>
+    </head>
+    <body>
+        <h2>OTP Verification</h2>
+        <form name="email" action="http://127.0.0.1:5000/mail_input" method="POST">
+            Please enter your email id : <input type="email" name="mailid" required>
+            <input type="submit" name="submit" value="ENTER">
+        </form>
+        {% with messages = get_flashed_messages() %}  
+            {% if messages %}  
+                {% for message in messages %}  
+                   <p>{{ message }}</p>  
+                {% endfor %}  
+            {% endif %}  
+        {% endwith %}
+    </body>
+</html>
